@@ -8,7 +8,7 @@ declare module 'mineflayer' {
   }
 }
 
-export default function plugin (bot: Bot): void {
+export function plugin (bot: Bot): void {
   bot.terminal = new UserInterface(bot)
 
   setTimeout(() => {
