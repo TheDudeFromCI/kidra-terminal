@@ -1,27 +1,26 @@
 {
-  "name": "project_kidra",
+  "name": "kidra_terminal",
   "version": "0.1.0",
-  "description": "An experimental AI bot that executed commands through a virtual terminal interface.",
+  "description": "A clean terminal interface and command handler plugin for Mineflayer.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "ts-standard --fix && tsc",
     "fix-lint": "ts-standard --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ts-standard"
   },
   "keywords": [
     "bot",
-    "ai",
     "mineflayer",
-    "minecraft"
+    "minecraft",
+    "terminal",
+    "command"
   ],
   "author": "thedudefromci",
   "license": "MIT",
   "dependencies": {
     "blessed": "^0.1.81",
     "mineflayer": "^4.13.0",
-    "mineflayer-collectblock": "^1.4.1",
-    "mineflayer-pathfinder": "^2.4.4",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
