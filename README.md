@@ -23,9 +23,9 @@ npm install --save kidra_terminal
 
 After installation, the plugin can be loaded for a Mineflayer bot like any other plugin.
 ```js
-import terminal_plugin from 'kidra_terminal'
+const terminalPlugin = require('kidra_terminal').plugin
 
-bot.loadPlugin(terminal_plugin)
+bot.loadPlugin(terminalPlugin)
 ```
 
 ### Documentation
