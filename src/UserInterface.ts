@@ -45,7 +45,8 @@ export class UserInterface {
       title: 'Kidra Terminal'
     })
     this.screen.on('mouse', () => { })
-    this.screen.key(['escape', 'C-c'], () => this.bot.quit())
+    this.screen.key(['C-c'], () => this.bot.quit())
+    this.screen.key(['escape'], () => this.inputBox.focus())
 
     this.taskBox = blessed.box({
       top: 0,
