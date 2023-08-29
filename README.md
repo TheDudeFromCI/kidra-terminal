@@ -16,12 +16,12 @@
 
 This plugin can be installed as an `npm` package using this command:
 ```bash
-npm install --save kidra-terminal
+npm install --save kidra_terminal
 ```
 
 After installation, the plugin can be loaded for a Mineflayer bot like any other plugin.
 ```js
-import terminal_plugin from 'kidra-terminal'
+import terminal_plugin from 'kidra_terminal'
 
 bot.loadPlugin(terminal_plugin)
 ```
