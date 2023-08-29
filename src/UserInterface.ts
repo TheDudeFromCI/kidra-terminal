@@ -20,8 +20,10 @@ export class UserInterface {
     this.bot = bot
     this.commandBuffer = new CommandBuffer(this.bot)
 
-    console.log = m => this.log(m)
-    console.error = e => this.log(e)
+    console.log = m => this.info(m)
+    console.warn = m => this.warn(m)
+    console.error = m => this.error(m)
+    this.bot.on('chat', (username, message) => this.chat(username, message))
 
     this.bot.on('end', () => {
       this.program.clear()
@@ -75,8 +77,9 @@ export class UserInterface {
       scrollbar: {
         ch: '['
       },
+      tags: true,
       mouse: true,
-      content: '> '
+      content: '{blink}>{/blink}'
     })
     this.screen.append(this.logBox)
 
@@ -144,6 +147,22 @@ export class UserInterface {
     this.resizeBoxes()
   }
 
+  chat (username: string, message: string): void {
+    this.log('{white-fg}{bold}<' + username + '>{/bold} ' + message + '{/white-fg}')
+  }
+
+  info (message: any): void {
+    this.log('{green-fg}{bold}[INFO]{/bold} ' + String(message) + '{/green-fg}')
+  }
+
+  warn (message: any): void {
+    this.log('{yellow-fg}{bold}[WARN]{/bold} ' + String(message) + '{/yellow-fg}')
+  }
+
+  error (message: any): void {
+    this.log('{red-fg}{bold}[ERROR]{/bold} ' + String(message) + '{/red-fg}')
+  }
+
   log (message: string): void {
     if (this.cmdReady) {
       const lineCount = this.logBox.getLines().length
@@ -157,20 +176,22 @@ export class UserInterface {
   }
 
   enterCommand (message: string): void {
+    const cmdText = '{grey-fg}{bold}>{/bold} ' + message + '{/grey-fg}'
+
     if (this.cmdReady) {
       const lineCount = this.logBox.getLines().length
-      this.logBox.setLine(lineCount - 1, '> ' + message)
+      this.logBox.setLine(lineCount - 1, cmdText)
       this.logBox.setScrollPerc(100.0)
       this.resizeBoxes()
       this.cmdReady = false
     } else {
-      this.log('> ' + message)
+      this.log(cmdText)
     }
   }
 
   finishCommand (): void {
     if (this.cmdReady) return
-    this.logBox.pushLine('> ')
+    this.logBox.pushLine('{blink}>{/blink}')
     this.logBox.setScrollPerc(100.0)
     this.resizeBoxes()
     this.cmdReady = true
