@@ -19,7 +19,7 @@ export class UserInterface {
 
   readonly commandBuffer: CommandBuffer
 
-  constructor(bot: Bot) {
+  constructor (bot: Bot) {
     this.bot = bot
     this.commandBuffer = new CommandBuffer(this.bot)
 
@@ -115,41 +115,41 @@ export class UserInterface {
     this.commandBuffer.addHandler(new AsyncCommand(bot))
   }
 
-  addTask(task: string): number {
+  addTask (task: string): number {
     this.tasks.push(task)
     this.taskBox.setContent(this.tasks.join('\n'))
     this.resizeBoxes()
     return this.tasks.length - 1
   }
 
-  getTask(index: number): string {
+  getTask (index: number): string {
     return this.tasks[index]
   }
 
-  removeTask(index: number): void {
+  removeTask (index: number): void {
     this.tasks.splice(index, 1)
     this.taskBox.setContent(this.tasks.join('\n'))
     this.resizeBoxes()
   }
 
-  addProcess(process: string): number {
+  addProcess (process: string): number {
     this.processes.push(process)
     this.activeBox.setContent(this.processes.join('\n'))
     this.resizeBoxes()
     return this.processes.length - 1
   }
 
-  getProcess(index: number): string {
+  getProcess (index: number): string {
     return this.processes[index]
   }
 
-  removeProcess(index: number): void {
+  removeProcess (index: number): void {
     this.processes.splice(index, 1)
     this.activeBox.setContent(this.processes.join('\n'))
     this.resizeBoxes()
   }
 
-  log(message: string): void {
+  log (message: string): void {
     if (this.cmdReady) {
       const lineCount = this.logBox.getLines().length
       this.logBox.insertLine(lineCount - 1, message)
@@ -161,7 +161,7 @@ export class UserInterface {
     this.resizeBoxes()
   }
 
-  enterCommand(message: string): void {
+  enterCommand (message: string): void {
     if (this.cmdReady) {
       const lineCount = this.logBox.getLines().length
       this.logBox.setLine(lineCount - 1, '> ' + message)
@@ -173,7 +173,7 @@ export class UserInterface {
     }
   }
 
-  finishCommand(): void {
+  finishCommand (): void {
     if (this.cmdReady) return
     this.logBox.pushLine('> ')
     this.logBox.setScrollPerc(100.0)
@@ -181,7 +181,7 @@ export class UserInterface {
     this.cmdReady = true
   }
 
-  private resizeBoxes(): void {
+  private resizeBoxes (): void {
     this.taskBox.height = Math.max(1, this.tasks.length) + 2
     this.activeBox.height = Math.max(1, this.processes.length) + 2
     this.activeBox.top = this.taskBox.height - 1

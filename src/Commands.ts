@@ -16,12 +16,12 @@ export class Command {
   readonly name: string
   readonly args: string[]
 
-  constructor(name: string, args: string[]) {
+  constructor (name: string, args: string[]) {
     this.name = name.toLowerCase()
     this.args = args
   }
 
-  toString(): string {
+  toString (): string {
     return [this.name, ...this.args].join(' ')
   }
 }
@@ -34,21 +34,21 @@ export class CommandBuffer {
   private readonly asyncCmds: CommandExecution[] = []
   private pidIncrement: number = 0
 
-  constructor(bot: Bot) {
+  constructor (bot: Bot) {
     this.bot = bot
     this.bot.on('physicsTick', () => this.update())
   }
 
-  queue(cmd: string): void {
+  queue (cmd: string): void {
     const parsedCmd = parseCommand(cmd)
     this.buffer.push(parsedCmd)
   }
 
-  addHandler(cmdHandler: CommandHandler): void {
+  addHandler (cmdHandler: CommandHandler): void {
     this.handlers.push(cmdHandler)
   }
 
-  getHandler(cmdName: string): CommandHandler | null {
+  getHandler (cmdName: string): CommandHandler | null {
     cmdName = cmdName.toLowerCase()
     for (const handler of this.handlers) {
       if (handler.cmdName === cmdName) {
@@ -59,7 +59,7 @@ export class CommandBuffer {
     return null
   }
 
-  runAsyncCommand(cmd: string): void {
+  runAsyncCommand (cmd: string): void {
     const parsedCmd = parseCommand(cmd)
     const handler = this.getHandler(parsedCmd.name)
     if (handler == null) {
@@ -76,14 +76,14 @@ export class CommandBuffer {
     this.bot.terminal.addProcess('PID ' + exec.pid.toString() + ' : ' + parsedCmd.toString())
   }
 
-  private finishAsyncCommand(exec: CommandExecution): void {
+  private finishAsyncCommand (exec: CommandExecution): void {
     const index = this.asyncCmds.indexOf(exec)
     this.asyncCmds.splice(index, 1)
     this.bot.terminal.removeProcess(index)
     this.bot.terminal.log('Finished Async Process. PID ' + exec.pid.toString())
   }
 
-  private update(): void {
+  private update (): void {
     for (let i = this.asyncCmds.length - 1; i >= 0; i--) {
       if (this.asyncCmds[i].isRunning()) continue
       this.finishAsyncCommand(this.asyncCmds[i])
@@ -99,7 +99,7 @@ export class CommandBuffer {
     }
   }
 
-  private triggerNextCmd(): void {
+  private triggerNextCmd (): void {
     const next = this.buffer.shift()
     if (next == null) {
       this.bot.terminal.finishCommand()
@@ -119,7 +119,7 @@ export class CommandBuffer {
   }
 }
 
-function parseCommand(cmd: string): Command {
+function parseCommand (cmd: string): Command {
   const args = cmd.split(/\s+(?=(?:(?:[^"]*"){2})*[^"]*$)/)
   const name = args.splice(0, 1)[0]
   return new Command(name, args)

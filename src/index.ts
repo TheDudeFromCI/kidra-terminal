@@ -11,6 +11,6 @@ declare module 'mineflayer' {
   }
 }
 
-export default function plugin(bot: Bot): void {
+export default function plugin (bot: Bot): void {
   bot.terminal = new UserInterface(bot)
 }
