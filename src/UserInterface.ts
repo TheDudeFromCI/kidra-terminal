@@ -1,9 +1,6 @@
 import { Bot } from 'mineflayer'
 import blessed from 'blessed'
 import { CommandBuffer } from './Commands'
-import { SayCommand } from './commands/SayCommand'
-import { WaitCommand } from './commands/WaitCommand'
-import { AsyncCommand } from './commands/AsyncCommand'
 
 export class UserInterface {
   private readonly bot: Bot
@@ -109,10 +106,6 @@ export class UserInterface {
 
     console.log = m => this.log(m)
     console.error = e => this.log(e)
-
-    this.commandBuffer.addHandler(new SayCommand(bot))
-    this.commandBuffer.addHandler(new WaitCommand(bot))
-    this.commandBuffer.addHandler(new AsyncCommand(bot))
   }
 
   addTask (task: string): number {

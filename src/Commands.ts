@@ -1,4 +1,8 @@
 import { Bot } from 'mineflayer'
+import { AsyncCommand } from './commands/AsyncCommand'
+import { SayCommand } from './commands/SayCommand'
+import { WaitCommand } from './commands/WaitCommand'
+import { GotoCommand } from './commands/GotoCommand'
 
 export interface CommandExecution {
   readonly pid: number
@@ -37,6 +41,11 @@ export class CommandBuffer {
   constructor (bot: Bot) {
     this.bot = bot
     this.bot.on('physicsTick', () => this.update())
+
+    this.addHandler(new SayCommand(bot))
+    this.addHandler(new WaitCommand(bot))
+    this.addHandler(new AsyncCommand(bot))
+    this.addHandler(new GotoCommand(bot))
   }
 
   queue (cmd: string): void {

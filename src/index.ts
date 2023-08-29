@@ -1,6 +1,7 @@
 import { Bot } from 'mineflayer'
 import { UserInterface } from './UserInterface'
 import { Command } from './Commands'
+import { pathfinder as pathfinderPlugin } from 'mineflayer-pathfinder'
 
 declare module 'mineflayer' {
   interface Bot {
@@ -13,4 +14,8 @@ declare module 'mineflayer' {
 
 export default function plugin (bot: Bot): void {
   bot.terminal = new UserInterface(bot)
+
+  setTimeout(() => {
+    if (bot.pathfinder == null) bot.loadPlugin(pathfinderPlugin)
+  })
 }

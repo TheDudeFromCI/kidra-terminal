@@ -21,6 +21,7 @@
   "dependencies": {
     "blessed": "^0.1.81",
     "mineflayer": "^4.13.0",
+    "mineflayer-pathfinder": "^2.4.4",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
