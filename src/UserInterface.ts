@@ -20,6 +20,17 @@ export class UserInterface {
     this.bot = bot
     this.commandBuffer = new CommandBuffer(this.bot)
 
+    console.log = m => this.log(m)
+    console.error = e => this.log(e)
+
+    this.bot.on('end', () => {
+      this.program.clear()
+      this.program.disableMouse()
+      this.program.showCursor()
+      this.program.normalBuffer()
+      process.exit(0)
+    })
+
     this.program = blessed.program({
       title: 'Mineflayer Bot'
     })
@@ -32,13 +43,7 @@ export class UserInterface {
       title: 'Kidra Terminal'
     })
     this.screen.on('mouse', () => { })
-    this.screen.key(['escape', 'C-c'], () => {
-      this.program.clear()
-      this.program.disableMouse()
-      this.program.showCursor()
-      this.program.normalBuffer()
-      process.exit(0)
-    })
+    this.screen.key(['escape', 'C-c'], () => this.bot.quit())
 
     this.taskBox = blessed.box({
       top: 0,
@@ -103,9 +108,6 @@ export class UserInterface {
 
     this.resizeBoxes()
     this.inputBox.focus()
-
-    console.log = m => this.log(m)
-    console.error = e => this.log(e)
   }
 
   addTask (task: string): number {
