@@ -10,6 +10,7 @@ export interface CommandExecution {
   begin: () => void
   cancel: () => void
   isRunning: () => boolean
+  cleanup: () => void
 }
 
 export interface CommandHandler {
@@ -88,6 +89,7 @@ export class CommandBuffer {
   }
 
   private finishAsyncCommand (exec: CommandExecution): void {
+    exec.cleanup()
     const index = this.asyncCmds.indexOf(exec)
     this.asyncCmds.splice(index, 1)
     this.bot.terminal.removeProcess(index)
@@ -106,6 +108,7 @@ export class CommandBuffer {
     }
 
     if (!this.activeCmd.isRunning()) {
+      this.activeCmd.cleanup()
       this.activeCmd = null
     }
   }

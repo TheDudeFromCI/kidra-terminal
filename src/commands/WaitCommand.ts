@@ -46,4 +46,6 @@ class WaitExecution implements CommandExecution {
   isRunning (): boolean {
     return Date.now() < this.endTime
   }
+
+  cleanup (): void { /* Nothing to do */ }
 }
