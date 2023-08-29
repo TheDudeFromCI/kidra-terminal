@@ -12,6 +12,8 @@
 
 ---
 
+<img src="images/screenshot1.png"/>
+
 ### Getting Started
 
 This plugin can be installed as an `npm` package using this command:
