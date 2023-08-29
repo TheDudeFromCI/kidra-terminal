@@ -3,9 +3,9 @@
 
 <p align="center">
   <img src="https://github.com/TheDudeFromCI/kidra-terminal/workflows/Build/badge.svg" />
-  <img src="https://img.shields.io/npm/v/kidra-terminal" />
+  <img src="https://img.shields.io/npm/v/kidra_terminal" />
   <img src="https://img.shields.io/github/repo-size/TheDudeFromCI/kidra-terminal" />
-  <img src="https://img.shields.io/npm/dm/kidra-terminal" />
+  <img src="https://img.shields.io/npm/dm/kidra_terminal" />
   <img src="https://img.shields.io/github/contributors/TheDudeFromCI/kidra-terminal" />
   <img src="https://img.shields.io/github/license/TheDudeFromCI/kidra-terminal" />
 </p>
