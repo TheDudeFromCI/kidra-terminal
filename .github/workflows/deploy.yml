@@ -39,6 +39,9 @@ jobs:
     - name: Npm Install
       run: npm install
 
+    - name: Compile Typescript
+      run: npm run build
+
     - name: Publish
       run: npm publish
       env:
